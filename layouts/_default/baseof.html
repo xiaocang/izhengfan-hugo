@@ -8,6 +8,9 @@
         {{- partial "footer.html" . -}}
     </div>
     </body>
+    {{- partial "vendors.html" . -}}
+    {{- partial "google-analytics.html" . -}}
     <script src="https://use.typekit.net/hvv6ahj.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    {{- block "otherscript" . }}{{- end }}
 </html>
