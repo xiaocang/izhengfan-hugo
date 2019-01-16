@@ -1,0 +1,38 @@
+{{ $theme_css_path := "/css" }}
+
+<link rel="stylesheet" type="text/css" href="{{ $theme_css_path }}/style.min.css" />
+<meta name="keywords" content="{{- range .Site.Params.keywords -}}{{ . }},{{- end -}}"/>
+
+<!-- for Next Theme -->
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+
+<!-- Disable baidu tranformation -->
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<title>{{ .Title }}</title>
+
+<!-- verification -->
+{{ range .Site.Data.verification }}
+    {{ if ne .content "" }}
+    <meta name="{{ .name }}" content="{{ .content }}" />
+    {{ end }}
+{{ end }}
+<!-- verification end -->
+
+{{ with .Site.Data.static }}
+    {{ if .cdn.fontawesome }}
+    <link href="{{ .cdn.fontawesome }}" rel="stylesheet" type="text/css">
+    {{ end }}
+
+    {{ with .favicon }}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ .apple_touch_icon }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ .medium }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ .small }}">
+    <link rel="mask-icon" href="{{ .safari_pinned_tab }}" {{ if .android_chrome_color }}color="{{ .android_chrome_color }}"{{ end }}>
+    <link rel="manifest" href="{{ .android_manifest }}">
+    <meta name="msapplication-config" content="{{ .ms_browserconfig }}" />
+    {{ end }}
+{{ end }}

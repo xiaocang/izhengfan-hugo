@@ -1,0 +1,20 @@
+<div class="nav-header">
+    <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+
+    <!-- social -->
+    {{ if .Site.Params.social }}|{{ end }}
+    {{- range $label, $attrs := .Site.Params.social }}
+        {{- with split $attrs "||" }}
+            {{ $link := trim (index . 0) " " }}
+            {{ $icon := trim (index . 1) " " }}
+            <a href="{{- $link -}}" target="_blank" title="{{- $label -}}">
+                <i class="fa fa-fw fa-{{- $icon -}}"></i>
+            </a>
+        {{ end -}}
+    {{ end -}}
+    <!-- social end -->
+
+    {{ range .Site.Menus.main }}
+        | <a href="{{ .URL }}">{{- .Name -}}</a>
+    {{ end }}
+</div>

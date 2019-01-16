@@ -1,0 +1,22 @@
+<div class="info-bottom">
+    <div class="info-bottom-text">
+        <!-- license -->
+        <div itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                <img src="/img/cc-by-nc-sa.svg" alt="Creative Commons"/>
+            </a>
+
+            <!-- copyright -->
+            &copy; {{ default .Site.Params.CopyrightSince "2003" }} &mdash;
+            <span itemprop="copyrightYear">{{ now.Format "2006" }}</span>
+            <span class="author" itemprop="copyrightHolder">{{ default .Site.Copyright "xiaocang" }}</span>
+            <!-- copyright end -->
+
+            {{ range .Site.Params.footertext }}
+                | {{ . | markdownify }}
+            {{ end }}
+        </div>
+        <!-- license end -->
+
+    </div>
+</div>

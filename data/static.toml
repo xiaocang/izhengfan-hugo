@@ -1,0 +1,11 @@
+[cdn]
+    fontawesome = "//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css"
+
+[favicon]
+    small                = "/favicon/favicon-16x16.png"
+    medium               = "/favicon/favicon-32x32.png"
+    apple_touch_icon     = "/favicon/apple-touch-icon.png"
+    safari_pinned_tab    = "/favicon/safari-pinned-tab.svg"
+    android_manifest     = "/favicon/manifest.json"
+    ms_browserconfig     = "/favicon/browserconfig.xml"
+    android_chrome_color = "#222"

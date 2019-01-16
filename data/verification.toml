@@ -1,0 +1,15 @@
+[google]
+name = "google-site-verification"
+content = ""
+
+[bing]
+name = "msvalidate.01"
+content = ""
+
+[yandex]
+name = "yandex-verification"
+content = ""
+
+[baidu]
+name = "baidu-site-verification"
+content = ""
