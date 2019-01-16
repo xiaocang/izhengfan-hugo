@@ -1,0 +1,6 @@
+{{ $comment_enable := default .Params.comment true }}
+
+{{ if $comment_enable }}
+<div class="disqus_btn">点击加载Disqus评论</div>
+<div id="disqus_thread"></div>
+{{ end }}

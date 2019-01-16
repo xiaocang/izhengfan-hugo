@@ -1,3 +1,27 @@
 {{ define "main" }}
-    {{ .Content }}
+<header>
+    <h2>{{ .Title }}</h2>
+    <p>
+        <i>{{ .Date.Format "2006-01-02 03:04" }}</i>
+        {{ if .Site.Params.source_url }}
+        • <a href="{{ .Site.Params.source_url }}{{ .File.Path }}">编辑本页</a>
+        {{ end }}
+    </p>
+</header>
+<article> {{ .Content }} </article>
+<div id="info-bottom">
+<hr>
+<p>标签:
+    {{ range .Params.tags }}
+    <block class="izhengfan-tag">
+    <a href="{{ printf "%s#%s" (relURL "tags") . }}">{{ . }}</a>
+    </block>
+    {{ end }}
+</p>
+{{ partial "disqus.html" . }}
+</div>
+{{ end }}
+
+{{ define "otherscript" }}
+{{ partial "disqus-script.html" . }}
 {{ end }}

@@ -1,34 +1,32 @@
 {{ define "main" }}
-<div class="main-body">
-    <article>
-        <blockquote><p>{{ .Site.Params.description }}</p></blockquote>
-    </article>
+<article>
+    <blockquote><p>{{ .Site.Params.description }}</p></blockquote>
+</article>
 
-    <p style="margin-top:1.2em;margin-bottom:0;">
-        <b>文章</b> |
-        按<a href="{{ relURL "tags" }}">标签</a>浏览 |
-        订阅 <a href="{{ relURL "atom.xml" }}">RSS</a>
-    </p>
+<p style="margin-top:1.2em;margin-bottom:0;">
+    <b>文章</b> |
+    按<a href="{{ relURL "tags" }}">标签</a>浏览 |
+    订阅 <a href="{{ relURL "atom.xml" }}">RSS</a>
+</p>
 
-    <table>
-        <tbody>
-        {{ range .Site.RegularPages.GroupByDate "2006" }}
+<table>
+    <tbody>
+    {{ range .Site.RegularPages.GroupByDate "2006" }}
+        <tr class="blog-table">
+            <td>
+                {{ $this_year := .Key }}
+                <h3 id="year_{{ $this_year }}">{{ $this_year }}</h3>
+            </td>
+        </tr>
+        {{ range .Pages }}
             <tr class="blog-table">
-                <td>
-                    {{ $this_year := .Key }}
-                    <h3 id="year_{{ $this_year }}">{{ $this_year }}</h3>
-                </td>
+                <td>{{ .Date.Format "2006-01-02" }}</td>
+                <td><a href="{{ .Permalink }}" class="post-list-item">
+                    {{- .LinkTitle -}}
+                </a></td>
             </tr>
-            {{ range .Pages }}
-                <tr class="blog-table">
-                    <td>{{ .Date.Format "2006-01-02" }}</td>
-                    <td><a href="{{ .Permalink }}" class="post-list-item">
-                        {{- .Title -}}
-                    </a></td>
-                </tr>
-            {{ end }}
         {{ end }}
-        </tbody>
-    </table>
-</div>
+    {{ end }}
+    </tbody>
+</table>
 {{ end }}

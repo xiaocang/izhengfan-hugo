@@ -4,7 +4,7 @@
     <body>
     <div class="body-wrapper">
         {{- partial "header.html" . -}}
-        {{- block "main" . }}{{- end }}
+        <div class="main-body"> {{- block "main" . }}{{- end }} </div>
         {{- partial "footer.html" . -}}
     </div>
     </body>
