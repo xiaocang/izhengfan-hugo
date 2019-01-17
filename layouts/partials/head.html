@@ -1,6 +1,7 @@
 {{ $theme_css_path := "/css" }}
 
 <link rel="stylesheet" type="text/css" href="{{ printf "%s/style.min.css" $theme_css_path | absURL }}" />
+<link rel="stylesheet" type="text/css" href="{{ printf "%s/syntax.css" $theme_css_path | absURL }}" />
 <meta name="keywords" content="{{- range .Site.Params.keywords -}}{{ . }},{{- end -}}"/>
 
 <!-- for Next Theme -->
