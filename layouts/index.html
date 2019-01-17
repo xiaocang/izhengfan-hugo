@@ -22,9 +22,16 @@
         {{ range .Pages }}
             <tr class="blog-table">
                 <td>{{ .Date.Format "2006-01-02" }}</td>
-                <td><a href="{{ .Permalink }}" class="post-list-item">
-                    {{- .LinkTitle -}}
-                </a></td>
+                <td>
+{{ if .Params.linkcolor }}
+{{ $color := index .Site.Data.color.link .Params.linkcolor }}
+<a href="{{ .Permalink }}" class="post-list-item" style="color:{{ $color }};">
+{{ else }}
+                    <a href="{{ .Permalink }}" class="post-list-item">
+{{ end }}
+                        {{- .LinkTitle -}}
+                    </a>
+                </td>
             </tr>
         {{ end }}
     {{ end }}
