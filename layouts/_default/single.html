@@ -9,22 +9,26 @@
     </p>
 </header>
 <article>
-    {{ if and (default .Params.toc true) (ne (countwords .TableOfContents) 0) }}
+    {{ $enable_toc := ne .Params.toc false }}
+    {{ if and $enable_toc (ne (countwords .TableOfContents) 0) }}
     <div class="markdown-toc">{{ .TableOfContents }}</div>
     {{ end }}
 
     {{ .Content }}
 </article>
 <div id="info-bottom">
-<hr>
-<p>标签:
-    {{ range .Params.tags }}
-    <block class="izhengfan-tag">
-    <a href="{{ printf "#%s" . }}">{{ . }}</a>
-    </block>
-    {{ end }}
-</p>
-{{ partial "disqus.html" . }}
+{{ if eq .Type "posts" }}
+    <hr>
+    <p>标签:
+        {{ range .Params.tags }}
+        <block class="izhengfan-tag">
+        <a href="{{ printf "#%s" . }}">{{ . }}</a>
+        </block>
+        {{ end }}
+    </p>
+    {{ partial "disqus.html" . }}
+{{ end }}
+
 </div>
 {{ end }}
 

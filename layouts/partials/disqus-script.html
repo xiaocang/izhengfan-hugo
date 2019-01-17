@@ -1,4 +1,4 @@
-{{ $comment_enable := default .Params.comment true }}
+{{ $comment_enable := ne .Params.comment false }}
 
 {{ if $comment_enable }}
 <script type="text/javascript">
