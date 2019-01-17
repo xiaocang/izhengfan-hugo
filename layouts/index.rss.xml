@@ -1,0 +1,26 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <title>{{ .Title }}</title>
+    <link href="{{ "/atom.xml" | absURL }}" rel="self"/>
+    <link href="{{ "/" | absURL }}" />
+    <updated>{{ .Lastmod.Format "20060102T15:04:05.008Z" | safeHTML }}</updated>
+    <id>{{ "/" | absURL }}</id>
+    <author>
+        <name>{{ delimit .Site.Author ", " }}</name>
+    </author>
+    <generator uri="https://gohugo.io/">Hugo</generator>
+    {{ range .Site.RegularPages }}
+        <entry>
+            <title>{{ .LinkTitle }}</title>
+            <link href="{{ .Permalink }}" />
+            <id>{{ .Permalink }}</id>
+            <published>{{ .Date.Format "20060102T15:04:05.008Z" | safeHTML }}</published>
+            <updated>{{ .Lastmod.Format "20060102T15:04:05.008Z" | safeHTML }}</updated>
+            <content type="html">
+                {{ `<![CDATA[ ` | safeHTML }}{{ .RawContent | markdownify | safeHTML }}]]>
+            </content>
+            <summary type="html">
+                {{ `<![CDATA[ ` | safeHTML }}{{ .Summary |  safeHTML }}]]>
+            </summary>
+        </entry>
+    {{ end }}
+</rss>
