@@ -8,7 +8,13 @@
         {{ end }}
     </p>
 </header>
-<article> {{ .Content }} </article>
+<article>
+    {{ if and (default .Params.toc true) (ne (countwords .TableOfContents) 0) }}
+    <div class="markdown-toc">{{ .TableOfContents }}</div>
+    {{ end }}
+
+    {{ .Content }}
+</article>
 <div id="info-bottom">
 <hr>
 <p>标签:

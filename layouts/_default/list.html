@@ -4,23 +4,24 @@
 <p>
     {{ range .Pages }}
     <block class="izhengfan-tag">
-        <a href="#{{ .Title }}">{{ .Title }}</a>
+        <a href="#{{ .LinkTitle | urlize }}">{{ .LinkTitle }}</a>
     </block>
     {{ end }}
 </p>
 
-{{ range .Site.Pages.GroupByParam "tags" }}
-    {{ $tag := .Key }}
-    <div><legend id="#{{ $tag }}">{{ $tag }}</legend></div>
+{{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+<div>
+    <legend id="{{ $name | urlize }}">{{ $name }}</legend>
 
     <ul>
-        {{ range .Pages }}
+        {{ range $taxonomy }}
         <p>
             <span>{{ .Date.Format "2006-01-02" }}</span>
-            <a class="pjaxlink" href="{{ .Permalink }}">{{ .Title }}</a>
+            <a class="pjaxlink" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
         </p>
         {{ end }}
     </ul>
+</div>
 {{ end }}
 
 {{ end }}
