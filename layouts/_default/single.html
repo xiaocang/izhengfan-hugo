@@ -20,7 +20,7 @@
 <p>标签:
     {{ range .Params.tags }}
     <block class="izhengfan-tag">
-    <a href="{{ printf "%s#%s" (relURL "tags") . }}">{{ . }}</a>
+    <a href="{{ printf "#%s" . }}">{{ . }}</a>
     </block>
     {{ end }}
 </p>

@@ -1,6 +1,6 @@
 {{ $theme_css_path := "/css" }}
 
-<link rel="stylesheet" type="text/css" href="{{ $theme_css_path }}/style.min.css" />
+<link rel="stylesheet" type="text/css" href="{{ printf "%s/style.min.css" $theme_css_path | absURL }}" />
 <meta name="keywords" content="{{- range .Site.Params.keywords -}}{{ . }},{{- end -}}"/>
 
 <!-- for Next Theme -->
@@ -28,11 +28,11 @@
     {{ end }}
 
     {{ with .favicon }}
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ .apple_touch_icon }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ .medium }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ .small }}">
-    <link rel="mask-icon" href="{{ .safari_pinned_tab }}" {{ if .android_chrome_color }}color="{{ .android_chrome_color }}"{{ end }}>
-    <link rel="manifest" href="{{ .android_manifest }}">
-    <meta name="msapplication-config" content="{{ .ms_browserconfig }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ .apple_touch_icon | absURL }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ .medium | absURL }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ .small | absURL }}">
+    <link rel="mask-icon" href="{{ .safari_pinned_tab | absURL }}" {{ if .android_chrome_color }}color="{{ .android_chrome_color }}"{{ end }}>
+    <link rel="manifest" href="{{ .android_manifest | absURL }}">
+    <meta name="msapplication-config" content="{{ .ms_browserconfig | absURL }}" />
     {{ end }}
 {{ end }}
