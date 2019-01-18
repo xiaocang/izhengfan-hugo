@@ -1,7 +1,9 @@
 {{ $theme_css_path := "/css" }}
 
 <link rel="stylesheet" type="text/css" href="{{ printf "%s/style.min.css" $theme_css_path | absURL }}" />
+{{ if ne .Kind "home" }}
 <link rel="stylesheet" type="text/css" href="{{ printf "%s/syntax.css" $theme_css_path | absURL }}" />
+{{ end }}
 <meta name="keywords" content="{{- range .Site.Params.keywords -}}{{ . }},{{- end -}}"/>
 
 <!-- for Next Theme -->
@@ -24,9 +26,7 @@
 <!-- verification end -->
 
 {{ with .Site.Data.static }}
-    {{ if .cdn.fontawesome }}
-    <link href="{{ .cdn.fontawesome }}" rel="stylesheet" type="text/css">
-    {{ end }}
+    <script async src="https://use.fontawesome.com/e2ae82ac15.js"></script>
 
     {{ with .favicon }}
     <link rel="apple-touch-icon" sizes="180x180" href="{{ .apple_touch_icon | absURL }}">
