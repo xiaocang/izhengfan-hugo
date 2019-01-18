@@ -11,7 +11,18 @@
 <article>
     {{ $enable_toc := ne .Params.toc false }}
     {{ if and $enable_toc (ne (countwords .TableOfContents) 0) }}
-    <div class="markdown-toc">{{ .TableOfContents }}</div>
+        {{ $toc := .TableOfContents }}
+        {{ $toc := (replace $toc "<ul>\n<li>\n<ul>" "<ul>") }}
+        {{ $toc := (replace $toc "<ul>\n<li>\n<ul>" "<ul>") }}
+        {{ $toc := (replace $toc "<ul>\n<li>\n<ul>" "<ul>") }}
+        {{ $toc := (replace $toc "</ul></li>\n</ul>" "</ul>") }}
+        {{ $toc := (replace $toc "</ul></li>\n</ul>" "</ul>") }}
+        {{ $toc := (replace $toc "</ul></li>\n</ul>" "</ul>") }}
+        <!-- count the number of remaining li tags -->
+        <!-- and only display ToC if more than 1, otherwise why bother -->
+        {{ if gt (len (split $toc "<li>")) 2 }}
+            <div class="markdown-toc">{{ safeHTML $toc }}</div>
+        {{ end }}
     {{ end }}
 
     {{ .Content }}
