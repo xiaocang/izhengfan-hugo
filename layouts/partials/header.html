@@ -7,7 +7,7 @@
         {{- with split $attrs "||" }}
             {{ $link := trim (index . 0) " " }}
             {{ $icon := trim (index . 1) " " }}
-            <a href="{{- $link -}}" target="_blank" title="{{- $label -}}">
+            <a href="{{- $link -}}" target="_blank" rel="noopener" title="{{- $label -}}">
                 <i class="fa fa-fw fa-{{- $icon -}}"></i>
             </a>
         {{ end -}}
