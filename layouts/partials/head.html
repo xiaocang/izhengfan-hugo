@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" type="text/css" href="{{ printf "%s/style.min.css" $theme_css_path | absURL }}" />
 {{ if ne .Kind "home" }}
-<link rel="stylesheet" type="text/css" href="{{ printf "%s/syntax.css" $theme_css_path | absURL }}" />
+<link rel="stylesheet" type="text/css" href="{{ printf "%s/syntax.min.css" $theme_css_path | absURL }}" />
 {{ end }}
 <meta name="keywords" content="{{- range .Site.Params.keywords -}}{{ . }},{{- end -}}"/>
 
@@ -27,7 +27,11 @@
 <!-- verification end -->
 
 {{ with .Site.Data.static }}
-    <script async src="https://use.fontawesome.com/e2ae82ac15.js"></script>
+    {{ if .cdn.fontawesome_dynamic }}
+    <link rel="stylesheet" type="text/css" href="{{ printf "%s/awesome.min.css" "/css" | absURL }}" />
+    {{ else }}
+    <script async src="//use.fontawesome.com/e2ae82ac15.js"></script>
+    {{ end }}
 
     {{ with .favicon }}
     <link rel="apple-touch-icon" sizes="180x180" href="{{ .apple_touch_icon | absURL }}">

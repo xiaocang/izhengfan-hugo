@@ -1,5 +1,8 @@
+path = "/css"
+
 [cdn]
-    fontawesome = "//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css"
+    fontawesome = "//use.fontawesome.com/releases/v4.7.0/css/font-awesome-css.min.css"
+    fontawesome_dynamic = true
 
 [favicon]
     small                = "/favicon/favicon-16x16.png"
