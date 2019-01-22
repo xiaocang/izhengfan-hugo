@@ -27,11 +27,7 @@
 <!-- verification end -->
 
 {{ with .Site.Data.static }}
-    {{ if .cdn.fontawesome_dynamic }}
-    <link rel="stylesheet" type="text/css" href="{{ printf "%s/awesome.min.css" "/css" | absURL }}" />
-    {{ else }}
     <script async src="//use.fontawesome.com/e2ae82ac15.js"></script>
-    {{ end }}
 
     {{ with .favicon }}
     <link rel="apple-touch-icon" sizes="180x180" href="{{ .apple_touch_icon | absURL }}">

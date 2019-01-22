@@ -1,8 +1,5 @@
-path = "/css"
-
 [cdn]
     fontawesome = "//use.fontawesome.com/releases/v4.7.0/css/font-awesome-css.min.css"
-    fontawesome_dynamic = true
 
 [favicon]
     small                = "/favicon/favicon-16x16.png"
