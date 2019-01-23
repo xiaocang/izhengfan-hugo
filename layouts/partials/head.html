@@ -27,7 +27,10 @@
 <!-- verification end -->
 
 {{ with .Site.Data.static }}
+    <!-- use icomoon instead
     <script async src="//use.fontawesome.com/e2ae82ac15.js"></script>
+    -->
+    <link rel="stylesheet" type="text/css" href="/css/icomoon.min.css">
 
     {{ with .favicon }}
     <link rel="apple-touch-icon" sizes="180x180" href="{{ .apple_touch_icon | absURL }}">

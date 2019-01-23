@@ -8,7 +8,7 @@
     font-weight: normal;
     font-style: normal;
   }
-  
+
   [class^="icon-"], [class*=" icon-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon' !important;
@@ -18,12 +18,15 @@
     font-variant: normal;
     text-transform: none;
     line-height: 1;
-  
+    display: inline-block;
+    width: 1.28571429em;
+    text-align: center;
+
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   .icon-qq:before {
     content: "\e900";
   }
@@ -42,4 +45,4 @@
   .icon-stackoverflow:before {
     content: "\ead0";
   }
-  
+

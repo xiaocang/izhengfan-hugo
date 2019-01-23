@@ -8,7 +8,10 @@
             {{ $link := trim (index . 0) " " }}
             {{ $icon := trim (index . 1) " " }}
             <a href="{{- $link -}}" target="_blank" rel="noopener" title="{{- $label -}}">
+                <!-- use icomoon instead
                 <i class="fa fa-fw fa-{{- $icon -}}"></i>
+                -->
+                <span class="icon-fw icon-{{- $icon -}}"></span>
             </a>
         {{ end -}}
     {{ end -}}

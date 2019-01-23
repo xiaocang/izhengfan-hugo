@@ -13,12 +13,7 @@
     </div>
     {{- partial "vendors.html" . -}}
     {{- partial "google-analytics.html" . -}}
-    {{- if false -}}
-    <script src="//use.typekit.net/hvv6ahj.js"></script>
-    <script>try{Typekit.load({ async: true });}catch(e){}</script>
-    {{ else }}
     {{- partial "typekit.html" -}}
-    {{ end }}
     {{- block "otherscript" . }}{{- end }}
     </body>
 </html>
