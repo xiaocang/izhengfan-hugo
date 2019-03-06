@@ -2,4 +2,4 @@
  * Syntax highlighting styles
  */.highlight{background:#eee}.highlight .c{color:#998;font-style:italic}/* disqus custom */.disqus_btn{cursor:pointer;border:1px solid #ddd;color:#999;margin:0 auto;max-width:200px;text-align:center;padding:10px;transition:0.5s}.disqus_btn:hover{cursor:pointer}table tbody tr td{padding-right:0.5em}article table tbody tr td{padding-right:0.3em;padding-left:0.3em;border:1px solid #ddd}/* rename .tag to izhangfan-tag*//**
  * Syntax highlighting styles
- *//* disqus custom */
+ */summary{display:block}summary::-webkit-details-marker{display:none}summary h4::before{content:'\25B6'}details[open]>summary h4::before{content:'\25BC'}

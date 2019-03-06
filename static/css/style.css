@@ -234,4 +234,18 @@ article table tbody tr td {
 /**
  * Syntax highlighting styles
  */
-/* disqus custom */
+summary {
+  display: block;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary h4::before {
+  content: '\25B6';
+}
+
+details[open] > summary h4::before {
+  content: '\25BC';
+}
