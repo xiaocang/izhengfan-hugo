@@ -7,6 +7,7 @@
       url('/icomoon/icomoon.svg?7z1guq#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
+    font-display：auto;
   }
 
   [class^="icon-"], [class*=" icon-"] {
