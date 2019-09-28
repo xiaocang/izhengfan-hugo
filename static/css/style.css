@@ -280,3 +280,15 @@ summary h4::before {
 details[open] > summary h4::before {
   content: '\25BC';
 }
+/* copyright */
+.post-copyright {
+    -webkit-font-smoothing: subpixel-antialiased;
+    font-feature-settings: "liga","locl" 0;
+    color: #333;
+    font-size: 16px;
+    margin-left: 0 !important;
+    padding: .7em 1em;
+    border-left: .25em solid rgb(231, 117, 0);
+    background-color: rgba(112,101,163,0.05);
+    margin: 1em 0;
+}

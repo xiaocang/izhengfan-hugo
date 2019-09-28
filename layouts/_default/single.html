@@ -29,6 +29,7 @@
 </article>
 <div id="info-bottom">
 {{ if eq .Type "posts" }}
+    {{ partial "copyright-warning.html" }}
     <hr>
     <p>标签:
         {{ range .Params.tags }}
