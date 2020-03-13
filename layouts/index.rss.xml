@@ -5,7 +5,7 @@
     <updated>{{ .Lastmod.Format "20060102T15:04:05.008Z" | safeHTML }}</updated>
     <id>{{ "/" | absURL }}</id>
     <author>
-        <name>{{ delimit .Site.Author ", " }}</name>
+        <name>{{ .Site.Params.Author }}</name>
     </author>
     <generator uri="https://gohugo.io/">Hugo</generator>
     {{ range .Site.RegularPages }}
