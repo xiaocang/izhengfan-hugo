@@ -223,6 +223,10 @@ table {
   border-radius: 3px;
   padding: 0.5em 0em 0.5em 2.5em;
 }
+.markdown-toc ul {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
 #info-bottom {
   margin-top: 2.4em;
   line-height: 1.4;
@@ -291,4 +295,11 @@ details[open] > summary h4::before {
     border-left: .25em solid rgb(231, 117, 0);
     background-color: rgba(112,101,163,0.05);
     margin: 1em 0;
+}
+#TableOfContents>ul {
+  padding: 0;
+}
+
+#TableOfContents>ul>li{
+  list-style: none;
 }
