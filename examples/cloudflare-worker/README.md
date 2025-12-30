@@ -149,6 +149,40 @@ Submit a new comment.
 }
 ```
 
+## Migrating from Disqus
+
+If you're moving from Disqus, you can migrate your existing comments:
+
+### 1. Export from Disqus
+
+1. Go to [Disqus Admin](https://disqus.com/admin/)
+2. Select your site
+3. Go to **Moderation** > **Export**
+4. Click "Export Comments" and wait for the email
+5. Download the XML file
+
+### 2. Convert to JSON
+
+```bash
+npm run migrate:disqus -- /path/to/disqus-export.xml
+```
+
+This creates a JSON file with all your comments. Review it to make sure everything looks correct.
+
+### 3. Import to D1
+
+```bash
+# Dry run first (generates SQL without executing)
+npm run migrate:import -- /path/to/disqus-export.json --dry-run
+
+# Actually import
+npm run migrate:import -- /path/to/disqus-export.json
+```
+
+### URL Mapping
+
+The migration script preserves the original URLs from Disqus. If your blog URL structure has changed, you may need to update the URLs in the JSON file before importing.
+
 ## Local Development
 
 ```bash

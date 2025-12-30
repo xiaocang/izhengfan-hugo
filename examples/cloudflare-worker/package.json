@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "db:init": "wrangler d1 execute blog-comments --file=schema.sql"
+    "db:init": "wrangler d1 execute blog-comments --file=schema.sql",
+    "migrate:disqus": "node scripts/migrate-disqus.js",
+    "migrate:import": "node scripts/import-to-d1.js"
   },
   "dependencies": {
     "hono": "^4.0.0"
