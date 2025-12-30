@@ -1,0 +1,4 @@
+/* English language font override */
+body {
+  font-family: Georgia, "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft JhengHei", "Microsoft YaHei", sans-serif;
+}
