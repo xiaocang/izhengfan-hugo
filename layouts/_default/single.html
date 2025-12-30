@@ -12,14 +12,10 @@
     {{ $enable_toc := ne .Params.toc false }}
     {{ if and $enable_toc (ne (countwords .TableOfContents) 0) }}
         {{ $toc := .TableOfContents }}
-        {{ $toc := (replace $toc "<ul>\n<li>\n<ul>" "<ul>") }}
-        {{ $toc := (replace $toc "<ul>\n<li>\n<ul>" "<ul>") }}
-        {{ $toc := (replace $toc "<ul>\n<li>\n<ul>" "<ul>") }}
-        {{ $toc := (replace $toc "</ul></li>\n</ul>" "</ul>") }}
-        {{ $toc := (replace $toc "</ul></li>\n</ul>" "</ul>") }}
-        {{ $toc := (replace $toc "</ul></li>\n</ul>" "</ul>") }}
-        <!-- count the number of remaining li tags -->
-        <!-- and only display ToC if more than 1, otherwise why bother -->
+        {{/* Remove empty nested ul/li wrappers that Hugo generates */}}
+        {{ $toc := replaceRE `<ul>\n<li>\n<ul>` "<ul>" $toc }}
+        {{ $toc := replaceRE `</ul></li>\n</ul>` "</ul>" $toc }}
+        <!-- only display ToC if more than 1 item -->
         {{ if gt (len (split $toc "<li>")) 2 }}
             <div class="markdown-toc">{{ safeHTML $toc }}</div>
         {{ end }}
@@ -33,9 +29,9 @@
     <hr>
     <p>标签:
         {{ range .Params.tags }}
-        <block class="izhengfan-tag">
+        <span class="izhengfan-tag">
         <a href="{{ printf "%s#%s" ("tags/" | relURL) . }}">{{ . }}</a>
-        </block>
+        </span>
         {{ end }}
     </p>
     {{ partial "disqus.html" . }}

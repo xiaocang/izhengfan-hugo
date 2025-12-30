@@ -130,30 +130,23 @@ body {
   min-height: 100%;
   margin: 0;
   font-family: "PingFang SC", "Noto Sans CJK", "Source Han Sans", "Microsoft Yahei", source-han-sans-simplified-c, sans-serif;
-  font-size: 16px\9;
   font-size: 1rem;
 }
 .body-wrapper {
   position: relative;
-  max-width: 50em\9;
   max-width: 52rem;
   margin: auto;
   min-height: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 .nav-header {
-  padding: 0.2em 3em\9;
-  padding: 0.2em 3.5vw 0.2em 3.5vw;
+  padding: 0.2em 3.5vw;
   line-height: 1.6;
-  height: 3em\9;
   height: 3vw;
   min-height: 2.2em;
 }
 .info-bottom {
-  padding: 0.2em 3em\9;
-  padding: 0.2em 3.5vw 0.2em 3.5vw;
+  padding: 0.2em 3.5vw;
   margin-bottom: 0;
   min-height: 3em;
   margin-top: 1em;
@@ -166,9 +159,7 @@ body {
 }
 .main-body {
   background-color: #fff;
-  padding: 0.8em 3em 1.4em 3em\9;
   padding: 0.8vw 3.5vw 1.4vw 3.5vw;
-  font-size: 1.1em\9;
   font-size: 1.1rem;
   line-height: 1.6;
 }
@@ -204,7 +195,6 @@ table {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-/* rename .tag to izhangfan-tag*/
 .izhengfan-tag {
   padding: 0.1em 0.6em;
   margin: 0.2em 0.4em;
@@ -212,7 +202,6 @@ table {
   border: solid 1px #ddd;
   border-radius: 999px;
   display: inline-block;
-  font-size: 16px\9;
   font-size: 1rem;
 }
 .izhengfan-tag:hover {
@@ -230,7 +219,6 @@ table {
 #info-bottom {
   margin-top: 2.4em;
   line-height: 1.4;
-  font-size: 16px\9;
   font-size: 1rem;
 }
 /**
@@ -265,7 +253,6 @@ article table tbody tr td {
   padding-left: 0.3em;
   border: 1px solid #ddd;
 }
-/* rename .tag to izhangfan-tag*/
 /**
  * Syntax highlighting styles
  */

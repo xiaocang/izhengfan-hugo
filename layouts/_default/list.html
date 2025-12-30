@@ -3,22 +3,22 @@
 <h3>标签</h3>
 <p>
     {{ range .Pages }}
-    <block class="izhengfan-tag">
+    <span class="izhengfan-tag">
         <a href="#{{ .LinkTitle | urlize }}">{{ .LinkTitle }}</a>
-    </block>
+    </span>
     {{ end }}
 </p>
 
 {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
 <div>
-    <legend id="{{ $name | urlize }}">{{ $name }}</legend>
+    <h4 id="{{ $name | urlize }}">{{ $name }}</h4>
 
     <ul>
         {{ range $taxonomy }}
-        <p>
+        <li>
             <span>{{ .Date.Format "2006-01-02" }}</span>
             <a class="pjaxlink" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
-        </p>
+        </li>
         {{ end }}
     </ul>
 </div>
