@@ -99,28 +99,28 @@ pre code {
   user-select: none;
 }
 pre .meta {
-  color: #8959a8;
+  color: #c678dd;
 }
 pre .comment {
-  color: #8e908c;
+  color: #5c6370;
 }
 pre .tag, pre .xml .tag .title {
-  color: #c82829;
+  color: #e06c75;
 }
 pre .built_in, pre .number, pre .params {
-  color: #f5871f;
+  color: #d19a66;
 }
 pre .number, pre .string {
-  color: #718c00;
+  color: #98c379;
 }
 pre .title {
-  color: #3e999f;
+  color: #61afef;
 }
 pre .function {
-  color: #4271ae;
+  color: #61afef;
 }
 pre .keyword {
-  color: #8959a8;
+  color: #c678dd;
 }
 html {
   background: #eee;
@@ -226,10 +226,10 @@ table {
  * Syntax highlighting styles
  */
 .highlight {
-  background: #eee;
+  background: #282c34;
 }
 .highlight .c {
-  color: #998;
+  color: #5c6370;
   font-style: italic;
 }
 /* disqus custom */
