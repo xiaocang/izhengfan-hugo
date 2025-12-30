@@ -1,0 +1,79 @@
+# Chinese translations
+
+[tags]
+other = "标签"
+
+[edit_page]
+other = "编辑本页"
+
+[load_disqus]
+other = "点击加载Disqus评论"
+
+[load_giscus]
+other = "点击加载Giscus评论"
+
+[load_comments]
+other = "点击加载评论"
+
+[leave_comment]
+other = "发表评论"
+
+[name_placeholder]
+other = "昵称 *"
+
+[email_placeholder]
+other = "邮箱（不公开）"
+
+[content_placeholder]
+other = "评论内容 *"
+
+[submit_comment]
+other = "提交评论"
+
+[copyright_notice]
+other = "除另有声明外，本博客文章均采用"
+
+[copyright_license]
+other = "知识共享(Creative Commons) 署名 4.0 国际许可协议"
+
+[copyright_licensed]
+other = "进行许可。转载请注明原作者与文章出处。"
+
+[tags_title]
+other = "标签"
+
+[posts]
+other = "文章"
+
+[browse_by_tags]
+other = "按标签浏览"
+
+[subscribe]
+other = "订阅"
+
+[no_comments]
+other = "暂无评论"
+
+[load_comments_failed]
+other = "加载评论失败"
+
+[fill_required]
+other = "请填写昵称和评论内容"
+
+[complete_captcha]
+other = "请完成人机验证"
+
+[submitting]
+other = "提交中..."
+
+[comment_success]
+other = "评论提交成功！"
+
+[submit_failed]
+other = "提交失败，请稍后重试"
+
+[enable_js_comments]
+other = "请启用 JavaScript 以查看评论。"
+
+[enable_js_giscus]
+other = "请启用 JavaScript 以查看由 Giscus 驱动的评论。"

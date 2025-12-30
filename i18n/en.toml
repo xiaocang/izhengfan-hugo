@@ -1,0 +1,79 @@
+# English translations
+
+[tags]
+other = "Tags"
+
+[edit_page]
+other = "Edit this page"
+
+[load_disqus]
+other = "Click to load Disqus comments"
+
+[load_giscus]
+other = "Click to load Giscus comments"
+
+[load_comments]
+other = "Click to load comments"
+
+[leave_comment]
+other = "Leave a comment"
+
+[name_placeholder]
+other = "Name *"
+
+[email_placeholder]
+other = "Email (optional)"
+
+[content_placeholder]
+other = "Your comment *"
+
+[submit_comment]
+other = "Submit"
+
+[copyright_notice]
+other = "Unless otherwise stated, articles on this blog are licensed under the"
+
+[copyright_license]
+other = "Creative Commons Attribution 4.0 International License"
+
+[copyright_licensed]
+other = "Please credit the original author and source when sharing."
+
+[tags_title]
+other = "Tags"
+
+[posts]
+other = "Posts"
+
+[browse_by_tags]
+other = "Browse by tags"
+
+[subscribe]
+other = "Subscribe"
+
+[no_comments]
+other = "No comments yet"
+
+[load_comments_failed]
+other = "Failed to load comments"
+
+[fill_required]
+other = "Please fill in name and comment"
+
+[complete_captcha]
+other = "Please complete the captcha"
+
+[submitting]
+other = "Submitting..."
+
+[comment_success]
+other = "Comment submitted successfully!"
+
+[submit_failed]
+other = "Failed to submit, please try again"
+
+[enable_js_comments]
+other = "Please enable JavaScript to view comments."
+
+[enable_js_giscus]
+other = "Please enable JavaScript to view comments powered by Giscus."

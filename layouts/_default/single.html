@@ -4,7 +4,7 @@
     <p>
         <i>{{ .Date.Format "2006-01-02 03:04" }}</i>
         {{ if .Site.Params.source_url }}
-        • <a href="{{ .Site.Params.source_url }}{{ .File.Path }}">编辑本页</a>
+        • <a href="{{ .Site.Params.source_url }}{{ .File.Path }}">{{ i18n "edit_page" }}</a>
         {{ end }}
     </p>
 </header>
@@ -27,7 +27,7 @@
 {{ if eq .Type "posts" }}
     {{ partial "copyright-warning.html" }}
     <hr>
-    <p>标签:
+    <p>{{ i18n "tags" }}:
         {{ range .Params.tags }}
         <span class="izhengfan-tag">
         <a href="{{ printf "%s#%s" ("tags/" | relURL) . }}">{{ . }}</a>

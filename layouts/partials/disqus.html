@@ -1,6 +1,6 @@
 {{ $comment_enable := ne .Params.comment false }}
 
 {{ if $comment_enable }}
-<div class="disqus_btn">点击加载Disqus评论</div>
+<div class="disqus_btn">{{ i18n "load_disqus" }}</div>
 <div id="disqus_thread"></div>
 {{ end }}

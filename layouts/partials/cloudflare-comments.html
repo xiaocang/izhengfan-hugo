@@ -1,23 +1,23 @@
-<div class="cf_comments_btn">点击加载评论</div>
+<div class="cf_comments_btn">{{ i18n "load_comments" }}</div>
 <div id="cf-comments" style="display: none;">
     <div id="cf-comments-list"></div>
     <div id="cf-comments-form">
-        <h4>发表评论</h4>
+        <h4>{{ i18n "leave_comment" }}</h4>
         <form id="cf-comment-form">
             <div class="cf-form-group">
-                <input type="text" id="cf-name" name="name" placeholder="昵称 *" required>
+                <input type="text" id="cf-name" name="name" placeholder="{{ i18n "name_placeholder" }}" required>
             </div>
             <div class="cf-form-group">
-                <input type="email" id="cf-email" name="email" placeholder="邮箱（不公开）">
+                <input type="email" id="cf-email" name="email" placeholder="{{ i18n "email_placeholder" }}">
             </div>
             <div class="cf-form-group">
-                <textarea id="cf-content" name="content" placeholder="评论内容 *" rows="4" required></textarea>
+                <textarea id="cf-content" name="content" placeholder="{{ i18n "content_placeholder" }}" rows="4" required></textarea>
             </div>
             {{- if .Site.Params.comments.cloudflare.turnstile -}}
             <div class="cf-form-group cf-turnstile"></div>
             {{- end -}}
             <div class="cf-form-group">
-                <button type="submit" id="cf-submit-btn">提交评论</button>
+                <button type="submit" id="cf-submit-btn">{{ i18n "submit_comment" }}</button>
             </div>
             <div id="cf-form-status"></div>
         </form>
