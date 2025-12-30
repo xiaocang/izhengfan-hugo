@@ -37,7 +37,10 @@ layouts/
 │   ├── head.html      # Critical CSS inlined + meta tags
 │   ├── header.html    # Navigation with social links
 │   ├── footer.html    # Copyright with CC BY-NC-SA 4.0
-│   └── disqus.html    # Lazy-loaded comments
+│   ├── comments.html  # Comment system dispatcher
+│   ├── disqus.html    # Disqus comments
+│   ├── giscus.html    # Giscus comments (GitHub Discussions)
+│   └── cloudflare-comments.html  # Cloudflare Workers comments
 ├── shortcodes/
 │   └── spoiler.html   # Collapsible content via <details>
 ├── index.html         # Homepage
@@ -75,13 +78,43 @@ Sites using this theme must set these parameters in their Hugo config:
 [services.googleAnalytics]
   ID = "UA-XXXXX-X"
 
+# Comment system configuration (choose one: disqus, giscus, or cloudflare)
+[params.comments]
+  system = "giscus"  # Options: "disqus", "giscus", "cloudflare", or "" to disable
+
+# Disqus (legacy, still supported)
 [services.disqus]
   shortname = "your-shortname"
+
+# Giscus (GitHub Discussions) - recommended
+[params.comments.giscus]
+  repo = "username/repo"
+  repoId = "R_xxx"
+  category = "Announcements"
+  categoryId = "DIC_xxx"
+  mapping = "pathname"        # pathname, url, title, og:title
+  reactionsEnabled = "1"
+  emitMetadata = "0"
+  inputPosition = "top"       # top, bottom
+  theme = "light"             # light, dark, preferred_color_scheme
+  lang = "zh-CN"
+
+# Cloudflare Workers comments
+[params.comments.cloudflare]
+  workerUrl = "https://comments.example.workers.dev"
+  turnstile = false           # Enable Turnstile captcha
+  turnstileSiteKey = ""       # Turnstile site key
 
 [[menus.main]]
   name = "About"
   url = "/about/"
 ```
+
+### Cloudflare Worker API
+
+If using Cloudflare comments, deploy a Worker with these endpoints:
+- `GET /comments?url={pageUrl}` - Returns `{ comments: [...] }`
+- `POST /comments` - Body: `{ url, name, email, content, turnstileToken? }`
 
 ## Post Frontmatter Options
 
@@ -92,6 +125,7 @@ date: 2024-01-01
 tags: ["tag1", "tag2"]
 toc: true          # Enable/disable table of contents (default: true)
 linkcolor: "blue"  # Custom link color from data/color.toml
+comment: false     # Disable comments for this post (default: true)
 ---
 ```
 
@@ -101,3 +135,4 @@ linkcolor: "blue"  # Custom link color from data/color.toml
 - **Critical CSS**: Essential styles are inlined in `head.html`; full stylesheet loaded asynchronously
 - **Multilingual Support**: Header shows language switcher when `site.Languages` has multiple entries
 - **Social Links**: Parsed from `params.social` map using `||` delimiter for URL and icon name
+- **Comment Systems**: Supports Disqus, Giscus (GitHub Discussions), and Cloudflare Workers. All use lazy-loading (click to load). Dispatcher partials (`comments.html`, `comments-script.html`) route to the correct system based on `params.comments.system`

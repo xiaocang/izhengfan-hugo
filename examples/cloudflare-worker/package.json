@@ -1,0 +1,17 @@
+{
+  "name": "blog-comments-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker for blog comments using D1",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:init": "wrangler d1 execute blog-comments --file=schema.sql"
+  },
+  "dependencies": {
+    "hono": "^4.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

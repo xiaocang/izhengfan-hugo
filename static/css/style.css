@@ -34,9 +34,10 @@ article h5 {
   margin: 20px 0;
   padding: 0;
   font-size: 14px;
-  color: #4d4d4c;
-  background: #f7f7f7;
+  color: #dcdfe4;
+  background: #282c34;
   line-height: 1.6;
+  border-radius: 4px;
 }
 code, pre {
   font-family: consolas,Menlo,"PingFang SC","Microsoft YaHei",monospace;
@@ -44,8 +45,8 @@ code, pre {
 code {
   padding: 2px 4px;
   word-wrap: break-word;
-  color: #555;
-  background: #eee;
+  color: #e06c75;
+  background: #282c34;
   border-radius: 3px;
   font-size: 14px;
 }
@@ -54,17 +55,17 @@ pre {
 }
 pre code {
   padding: 0;
-  color: #4d4d4c;
-  background: 0 0;
+  color: #dcdfe4;
+  background: transparent;
   text-shadow: none;
 }
 .highlight {
-  border-radius: 1px;
+  border-radius: 4px;
 }
 .highlight pre {
   border: none;
   margin: 0;
-  padding: 10px 0;
+  padding: 1em;
 }
 .highlight table {
   margin: 0;
@@ -78,15 +79,15 @@ pre code {
 .highlight .gutter pre {
   padding-left: 10px;
   padding-right: 10px;
-  color: #869194;
+  color: #5c6370;
   text-align: right;
-  background-color: #eff2f3;
+  background-color: #21252b;
 }
 .highlight .code pre {
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;
-  background-color: #f7f7f7;
+  background-color: #282c34;
 }
 .highlight .line {
   height: 20px;
@@ -289,4 +290,109 @@ details[open] > summary h4::before {
 
 #TableOfContents>ul>li{
   list-style: none;
+}
+/* giscus custom */
+.giscus_btn {
+  cursor: pointer;
+  border: 1px solid #ddd;
+  color: #999;
+  margin: 0 auto;
+  max-width: 200px;
+  text-align: center;
+  padding: 10px;
+  transition: 0.5s;
+}
+.giscus_btn:hover {
+  cursor: pointer;
+}
+/* cloudflare comments */
+.cf_comments_btn {
+  cursor: pointer;
+  border: 1px solid #ddd;
+  color: #999;
+  margin: 0 auto;
+  max-width: 200px;
+  text-align: center;
+  padding: 10px;
+  transition: 0.5s;
+}
+.cf_comments_btn:hover {
+  cursor: pointer;
+}
+#cf-comments {
+  margin-top: 1em;
+}
+.cf-comments-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5em 0;
+}
+.cf-comment {
+  padding: 0.8em 0;
+  border-bottom: 1px solid #eee;
+}
+.cf-comment-meta {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 0.3em;
+}
+.cf-comment-meta strong {
+  color: #333;
+  margin-right: 0.5em;
+}
+.cf-comment-date {
+  color: #999;
+  font-size: 0.85em;
+}
+.cf-comment-content {
+  line-height: 1.5;
+}
+.cf-no-comments, .cf-error {
+  color: #999;
+  font-style: italic;
+}
+#cf-comments-form h4 {
+  margin: 1em 0 0.5em 0;
+  font-size: 1em;
+}
+.cf-form-group {
+  margin-bottom: 0.8em;
+}
+.cf-form-group input,
+.cf-form-group textarea {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.5em;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 1em;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+.cf-form-group textarea {
+  max-width: 100%;
+  resize: vertical;
+}
+.cf-form-group button {
+  padding: 0.5em 1.5em;
+  background: #555;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 1em;
+}
+.cf-form-group button:hover {
+  background: #333;
+}
+.cf-form-group button:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+#cf-form-status .cf-success {
+  color: #28a745;
+}
+#cf-form-status .cf-error {
+  color: #dc3545;
+  font-style: normal;
 }

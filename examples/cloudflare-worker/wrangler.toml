@@ -1,0 +1,17 @@
+name = "blog-comments"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "blog-comments"
+database_id = "your-database-id-here"  # Replace after running: wrangler d1 create blog-comments
+
+# Environment variables (set via wrangler secret or dashboard)
+# TURNSTILE_SECRET = "your-turnstile-secret-key"
+# ALLOWED_ORIGINS = "https://yourblog.com,https://www.yourblog.com"
+
+[vars]
+# Set allowed origins (comma-separated) or leave empty to allow all
+ALLOWED_ORIGINS = ""

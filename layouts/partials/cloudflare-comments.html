@@ -1,0 +1,25 @@
+<div class="cf_comments_btn">点击加载评论</div>
+<div id="cf-comments" style="display: none;">
+    <div id="cf-comments-list"></div>
+    <div id="cf-comments-form">
+        <h4>发表评论</h4>
+        <form id="cf-comment-form">
+            <div class="cf-form-group">
+                <input type="text" id="cf-name" name="name" placeholder="昵称 *" required>
+            </div>
+            <div class="cf-form-group">
+                <input type="email" id="cf-email" name="email" placeholder="邮箱（不公开）">
+            </div>
+            <div class="cf-form-group">
+                <textarea id="cf-content" name="content" placeholder="评论内容 *" rows="4" required></textarea>
+            </div>
+            {{- if .Site.Params.comments.cloudflare.turnstile -}}
+            <div class="cf-form-group cf-turnstile"></div>
+            {{- end -}}
+            <div class="cf-form-group">
+                <button type="submit" id="cf-submit-btn">提交评论</button>
+            </div>
+            <div id="cf-form-status"></div>
+        </form>
+    </div>
+</div>

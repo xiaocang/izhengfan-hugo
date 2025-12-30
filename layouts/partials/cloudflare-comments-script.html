@@ -1,0 +1,136 @@
+{{- $cf := .Site.Params.comments.cloudflare -}}
+{{- if $cf.turnstile -}}
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+{{- end -}}
+<script type="text/javascript">
+(function() {
+    var workerUrl = '{{ $cf.workerUrl }}';
+    var pageUrl = '{{ .Permalink }}';
+    var turnstileEnabled = {{ if $cf.turnstile }}true{{ else }}false{{ end }};
+    var turnstileSiteKey = '{{ $cf.turnstileSiteKey }}';
+    var turnstileWidgetId = null;
+
+    function escapeHtml(text) {
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    function formatDate(dateStr) {
+        var d = new Date(dateStr);
+        return d.toLocaleDateString('zh-CN') + ' ' + d.toLocaleTimeString('zh-CN', {hour: '2-digit', minute: '2-digit'});
+    }
+
+    function renderComments(comments) {
+        var list = document.getElementById('cf-comments-list');
+        if (!comments || comments.length === 0) {
+            list.innerHTML = '<p class="cf-no-comments">暂无评论</p>';
+            return;
+        }
+        var html = '<ul class="cf-comments-ul">';
+        comments.forEach(function(c) {
+            html += '<li class="cf-comment">' +
+                '<div class="cf-comment-meta">' +
+                '<strong>' + escapeHtml(c.name) + '</strong>' +
+                '<span class="cf-comment-date">' + formatDate(c.created_at || c.createdAt) + '</span>' +
+                '</div>' +
+                '<div class="cf-comment-content">' + escapeHtml(c.content) + '</div>' +
+                '</li>';
+        });
+        html += '</ul>';
+        list.innerHTML = html;
+    }
+
+    function fetchComments() {
+        fetch(workerUrl + '/comments?url=' + encodeURIComponent(pageUrl))
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+                renderComments(data.comments || data);
+            })
+            .catch(function(err) {
+                console.error('Failed to fetch comments:', err);
+                document.getElementById('cf-comments-list').innerHTML = '<p class="cf-error">加载评论失败</p>';
+            });
+    }
+
+    function submitComment(e) {
+        e.preventDefault();
+        var btn = document.getElementById('cf-submit-btn');
+        var status = document.getElementById('cf-form-status');
+        var name = document.getElementById('cf-name').value.trim();
+        var email = document.getElementById('cf-email').value.trim();
+        var content = document.getElementById('cf-content').value.trim();
+
+        if (!name || !content) {
+            status.innerHTML = '<span class="cf-error">请填写昵称和评论内容</span>';
+            return;
+        }
+
+        var body = {
+            url: pageUrl,
+            name: name,
+            email: email,
+            content: content
+        };
+
+        if (turnstileEnabled && turnstileWidgetId) {
+            var token = turnstile.getResponse(turnstileWidgetId);
+            if (!token) {
+                status.innerHTML = '<span class="cf-error">请完成人机验证</span>';
+                return;
+            }
+            body.turnstileToken = token;
+        }
+
+        btn.disabled = true;
+        btn.textContent = '提交中...';
+        status.innerHTML = '';
+
+        fetch(workerUrl + '/comments', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        })
+        .then(function(res) {
+            if (!res.ok) throw new Error('Submit failed');
+            return res.json();
+        })
+        .then(function() {
+            status.innerHTML = '<span class="cf-success">评论提交成功！</span>';
+            document.getElementById('cf-comment-form').reset();
+            if (turnstileEnabled && turnstileWidgetId) {
+                turnstile.reset(turnstileWidgetId);
+            }
+            fetchComments();
+        })
+        .catch(function(err) {
+            console.error('Failed to submit comment:', err);
+            status.innerHTML = '<span class="cf-error">提交失败，请稍后重试</span>';
+        })
+        .finally(function() {
+            btn.disabled = false;
+            btn.textContent = '提交评论';
+        });
+    }
+
+    function loadComments() {
+        document.getElementById('cf-comments').style.display = 'block';
+        fetchComments();
+        document.getElementById('cf-comment-form').addEventListener('submit', submitComment);
+
+        if (turnstileEnabled && turnstileSiteKey) {
+            turnstileWidgetId = turnstile.render('.cf-turnstile', {
+                sitekey: turnstileSiteKey
+            });
+        }
+    }
+
+    $(document).ready(function() {
+        $('.cf_comments_btn').on('click', function() {
+            loadComments();
+            $(this).fadeOut();
+        });
+    });
+})();
+</script>
+<noscript>请启用 JavaScript 以查看评论。</noscript>

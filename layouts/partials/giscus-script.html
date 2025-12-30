@@ -1,0 +1,28 @@
+{{- $giscus := .Site.Params.comments.giscus -}}
+<script type="text/javascript">
+function loadGiscus() {
+    var d = document, s = d.createElement('script');
+    s.src = "https://giscus.app/client.js";
+    s.setAttribute('data-repo', '{{ $giscus.repo }}');
+    s.setAttribute('data-repo-id', '{{ $giscus.repoId }}');
+    s.setAttribute('data-category', '{{ $giscus.category | default "Announcements" }}');
+    s.setAttribute('data-category-id', '{{ $giscus.categoryId }}');
+    s.setAttribute('data-mapping', '{{ $giscus.mapping | default "pathname" }}');
+    s.setAttribute('data-strict', '{{ $giscus.strict | default "0" }}');
+    s.setAttribute('data-reactions-enabled', '{{ $giscus.reactionsEnabled | default "1" }}');
+    s.setAttribute('data-emit-metadata', '{{ $giscus.emitMetadata | default "0" }}');
+    s.setAttribute('data-input-position', '{{ $giscus.inputPosition | default "top" }}');
+    s.setAttribute('data-theme', '{{ $giscus.theme | default "light" }}');
+    s.setAttribute('data-lang', '{{ $giscus.lang | default "zh-CN" }}');
+    s.setAttribute('crossorigin', 'anonymous');
+    s.async = true;
+    d.querySelector('.giscus').appendChild(s);
+}
+$(document).ready(function () {
+    $('.giscus_btn').on('click', function(){
+        loadGiscus();
+        $(this).fadeOut();
+    });
+});
+</script>
+<noscript>请启用 JavaScript 以查看由 <a href="https://giscus.app">Giscus</a> 驱动的评论。</noscript>

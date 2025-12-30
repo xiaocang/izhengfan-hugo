@@ -1,0 +1,16 @@
+{{- $comment_enable := ne .Params.comment false -}}
+{{- if $comment_enable -}}
+    {{- $system := .Site.Params.comments.system | default "" -}}
+    {{- /* Backward compatibility: default to disqus if shortname exists but no system specified */ -}}
+    {{- if and (eq $system "") .Site.Config.Services.Disqus.Shortname -}}
+        {{- $system = "disqus" -}}
+    {{- end -}}
+
+    {{- if eq $system "giscus" -}}
+        {{- partial "giscus-script.html" . -}}
+    {{- else if eq $system "cloudflare" -}}
+        {{- partial "cloudflare-comments-script.html" . -}}
+    {{- else if eq $system "disqus" -}}
+        {{- partial "disqus-script.html" . -}}
+    {{- end -}}
+{{- end -}}
