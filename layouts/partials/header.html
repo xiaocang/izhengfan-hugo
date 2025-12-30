@@ -20,4 +20,17 @@
     {{- range .Site.Menus.main }}
         | <a href="{{ .URL }}">{{- .Name -}}</a>
     {{ end }}
+
+    {{- if gt (len .Site.Languages) 1 }}
+        |
+        {{- range .Translations }}
+            <a href="{{ .Permalink }}">{{ .Language.LanguageName }}</a>
+        {{- else }}
+            {{- range .Site.Languages }}
+                {{- if ne $.Language.Lang .Lang }}
+                    <a href="{{ .Lang | relLangURL }}">{{ .LanguageName }}</a>
+                {{- end }}
+            {{- end }}
+        {{- end }}
+    {{- end }}
 </div>
