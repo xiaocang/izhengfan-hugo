@@ -1,0 +1,24 @@
+# Hugo build artifacts
+public/
+resources/
+.hugo_build.lock
+hugo_stats.json
+
+# Cloudflare Worker / Node tooling
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.wrangler/
+.dev.vars
+dist/
+
+# Data exports from worker scripts
+examples/cloudflare-worker/www-*
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.claude/

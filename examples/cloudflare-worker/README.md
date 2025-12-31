@@ -70,6 +70,17 @@ By default, all origins are allowed. To restrict to specific domains, set `ALLOW
 ALLOWED_ORIGINS = "https://yourblog.com,https://www.yourblog.com"
 ```
 
+### Avatar Proxy (Optional)
+
+To serve avatars through your worker, point `avatarBase` to `https://<worker>.workers.dev/avatar/by-id/`
+(or leave `avatarBase` empty to default to that). The front end sends comment IDs only, and the worker
+will proxy to `AVATAR_BASE` (defaults to `https://www.gravatar.com/avatar/`).
+
+```toml
+[vars]
+AVATAR_BASE = "https://www.gravatar.com/avatar/"
+```
+
 ### Turnstile Spam Protection (Optional)
 
 1. Create a Turnstile widget at [Cloudflare Dashboard](https://dash.cloudflare.com/?to=/:account/turnstile)
@@ -101,6 +112,11 @@ Add this to your Hugo site's `config.toml`:
   # Optional Turnstile
   turnstile = false
   turnstileSiteKey = ""
+  # Optional avatars (worker proxy)
+  # Use your worker to proxy avatars:
+  avatarBase = "https://blog-comments.xxx.workers.dev/avatar/by-id/"
+  avatarSize = 48
+  avatarDefault = "identicon"
 ```
 
 ## API Reference
@@ -124,6 +140,24 @@ Fetch comments for a page.
     }
   ]
 }
+```
+
+### GET /avatar/by-id/:id
+
+Proxy an avatar by comment ID (the worker looks up the email hash and falls back to a
+deterministic hash when no email is stored).
+
+**Path Parameters:**
+- `id` (required): comment id
+
+**Query Parameters:**
+- `s` (optional): size in pixels
+- `d` (optional): default avatar style or URL
+- `r` (optional): rating
+
+**Example:**
+```
+https://blog-comments.xxx.workers.dev/avatar/by-id/123?s=48&d=identicon
 ```
 
 ### POST /comments

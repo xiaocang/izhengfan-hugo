@@ -15,3 +15,4 @@ database_id = "your-database-id-here"  # Replace after running: wrangler d1 crea
 [vars]
 # Set allowed origins (comma-separated) or leave empty to allow all
 ALLOWED_ORIGINS = ""
+AVATAR_BASE = "https://www.gravatar.com/avatar/"

@@ -306,19 +306,6 @@ details[open] > summary h4::before {
   cursor: pointer;
 }
 /* cloudflare comments */
-.cf_comments_btn {
-  cursor: pointer;
-  border: 1px solid #ddd;
-  color: #999;
-  margin: 0 auto;
-  max-width: 200px;
-  text-align: center;
-  padding: 10px;
-  transition: 0.5s;
-}
-.cf_comments_btn:hover {
-  cursor: pointer;
-}
 #cf-comments {
   margin-top: 1em;
 }
@@ -328,8 +315,25 @@ details[open] > summary h4::before {
   margin: 0 0 1.5em 0;
 }
 .cf-comment {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8em;
   padding: 0.8em 0;
   border-bottom: 1px solid #eee;
+}
+.cf-comment-avatar {
+  flex: 0 0 40px;
+}
+.cf-comment-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: none;
+  object-fit: cover;
+}
+.cf-comment-body {
+  flex: 1;
+  min-width: 0;
 }
 .cf-comment-meta {
   font-size: 0.9em;

@@ -1,7 +1,89 @@
 import { Hono } from 'hono';
-import { cors } from 'hono/cors';
 
 const app = new Hono();
+
+// Compact MD5 implementation for Gravatar compatibility
+function md5(str) {
+  const k = [], s = [];
+  for (let i = 0; i < 64; i++) {
+    k[i] = Math.floor(Math.abs(Math.sin(i + 1)) * 0x100000000);
+    s[i] = [7, 12, 17, 22, 5, 9, 14, 20, 4, 11, 16, 23, 6, 10, 15, 21][((i / 16) | 0) * 4 + (i % 4)];
+  }
+  const input = unescape(encodeURIComponent(str));
+  const bytes = [];
+  for (let i = 0; i < input.length; i++) bytes.push(input.charCodeAt(i));
+  bytes.push(0x80);
+  while ((bytes.length % 64) !== 56) bytes.push(0);
+  const bits = input.length * 8;
+  for (let i = 0; i < 8; i++) bytes.push((bits / Math.pow(2, 8 * i)) & 0xff);
+
+  let [a0, b0, c0, d0] = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476];
+  for (let i = 0; i < bytes.length; i += 64) {
+    const m = [];
+    for (let j = 0; j < 16; j++) {
+      m[j] = bytes[i + j * 4] | (bytes[i + j * 4 + 1] << 8) | (bytes[i + j * 4 + 2] << 16) | (bytes[i + j * 4 + 3] << 24);
+    }
+    let [a, b, c, d] = [a0, b0, c0, d0];
+    for (let j = 0; j < 64; j++) {
+      let f, g;
+      if (j < 16) { f = (b & c) | (~b & d); g = j; }
+      else if (j < 32) { f = (d & b) | (~d & c); g = (5 * j + 1) % 16; }
+      else if (j < 48) { f = b ^ c ^ d; g = (3 * j + 5) % 16; }
+      else { f = c ^ (b | ~d); g = (7 * j) % 16; }
+      const temp = d; d = c; c = b;
+      const sum = (a + f + k[j] + m[g]) >>> 0;
+      b = (b + ((sum << s[j]) | (sum >>> (32 - s[j])))) >>> 0;
+      a = temp;
+    }
+    a0 = (a0 + a) >>> 0; b0 = (b0 + b) >>> 0; c0 = (c0 + c) >>> 0; d0 = (d0 + d) >>> 0;
+  }
+  return [a0, b0, c0, d0].map(n =>
+    [0, 8, 16, 24].map(i => ((n >>> i) & 0xff).toString(16).padStart(2, '0')).join('')
+  ).join('');
+}
+
+function normalizeEmail(email) {
+  return email.trim().toLowerCase();
+}
+
+function buildEmailHash(email) {
+  if (!email) return null;
+  const normalized = normalizeEmail(email);
+  if (!normalized) return null;
+  return md5(normalized);
+}
+
+function buildCommentAvatarHash(commentId, email) {
+  const emailHash = buildEmailHash(email);
+  if (emailHash) return emailHash;
+  return md5(`comment:${commentId}`);
+}
+
+function normalizeAvatarBase(base) {
+  if (!base) return '';
+  return base.endsWith('/') ? base : `${base}/`;
+}
+
+function pickSearchParam(params, name, pattern) {
+  const value = params.get(name);
+  if (!value) return null;
+  if (pattern && !pattern.test(value)) return null;
+  return value;
+}
+
+function buildAvatarRequestUrl(base, hash, requestUrl) {
+  const avatarUrl = new URL(`${base}${hash}`);
+  const query = new URL(requestUrl).searchParams;
+  const size = pickSearchParam(query, 's', /^\d+$/);
+  const fallback = pickSearchParam(query, 'd');
+  const rating = pickSearchParam(query, 'r');
+
+  if (size) avatarUrl.searchParams.set('s', size);
+  if (fallback) avatarUrl.searchParams.set('d', fallback);
+  if (rating) avatarUrl.searchParams.set('r', rating);
+
+  return avatarUrl;
+}
 
 // CORS middleware
 app.use('*', async (c, next) => {
@@ -27,6 +109,52 @@ app.use('*', async (c, next) => {
   }
 
   await next();
+});
+
+// GET /avatar/by-id/:id - Proxy avatar based on comment id
+app.get('/avatar/by-id/:id', async (c) => {
+  const rawId = c.req.param('id') || '';
+  const commentId = Number.parseInt(rawId, 10);
+  if (!Number.isFinite(commentId) || commentId <= 0) {
+    return c.text('Invalid comment id', 400);
+  }
+
+  const base = normalizeAvatarBase(c.env.AVATAR_BASE || 'https://www.gravatar.com/avatar/');
+  if (!base) {
+    return c.text('Avatar base not configured', 500);
+  }
+
+  try {
+    const { results } = await c.env.DB.prepare(
+      'SELECT email FROM comments WHERE id = ?'
+    ).bind(commentId).all();
+
+    const row = results && results[0];
+    if (!row) {
+      return c.text('Comment not found', 404);
+    }
+
+    const hash = buildCommentAvatarHash(commentId, row.email);
+    const avatarUrl = buildAvatarRequestUrl(base, hash, c.req.url);
+
+    const upstream = await fetch(avatarUrl.toString(), {
+      cf: {
+        cacheTtl: 86400,
+        cacheEverything: true
+      }
+    });
+
+    const headers = new Headers(upstream.headers);
+    headers.set('Cache-Control', 'public, max-age=86400, s-maxage=86400');
+
+    return new Response(upstream.body, {
+      status: upstream.status,
+      headers
+    });
+  } catch (error) {
+    console.error('Database error:', error);
+    return c.text('Failed to fetch avatar', 500);
+  }
 });
 
 // Verify Turnstile token (optional)
